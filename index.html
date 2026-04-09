@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>智慧計算學門發展趨勢暨學門交流</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink-900: #0f172a;
+        --ink-700: #334155;
+        --ink-500: #64748b;
+        --surface-100: #f6f6f2;
+        --surface-200: #ececdf;
+        --card: rgba(255, 255, 255, 0.9);
+        --accent: #d97706;
+        --accent-2: #0f766e;
+        --accent-soft: #fff7ed;
+        --line: rgba(15, 23, 42, 0.12);
+        --nav-height: 72px;
+        --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.08);
+        --radius-lg: 20px;
+        --radius-md: 14px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Noto Sans TC", sans-serif;
+        line-height: 1.6;
+        color: var(--ink-900);
+        background:
+          radial-gradient(circle at 92% -10%, #ffd8a8 0%, transparent 40%),
+          radial-gradient(circle at 0% 60%, #99f6e4 0%, transparent 36%),
+          linear-gradient(135deg, var(--surface-100), #fff);
+        margin: 0;
+        padding: 0;
+        padding-top: var(--nav-height);
+        overflow-x: hidden;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(20px);
+        z-index: -2;
+        animation: floatGlow 12s ease-in-out infinite;
+      }
+
+      body::before {
+        width: 280px;
+        height: 280px;
+        top: 8%;
+        right: -80px;
+        background: rgba(217, 119, 6, 0.2);
+      }
+
+      body::after {
+        width: 320px;
+        height: 320px;
+        bottom: 0;
+        left: -120px;
+        background: rgba(15, 118, 110, 0.22);
+        animation-delay: 2.5s;
+      }
+
+      .progress-track {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.28);
+        z-index: 1200;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        transition: width 0.12s linear;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(1040px, calc(100% - 22px));
+        height: var(--nav-height);
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-soft);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+        padding: 0 18px;
+      }
+
+      .brand {
+        font-family: "Space Grotesk", "Noto Sans TC", sans-serif;
+        letter-spacing: 0.6px;
+        color: var(--ink-900);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: var(--ink-700);
+        font-weight: 700;
+        margin: 0;
+        padding: 8px 14px;
+        border-radius: 999px;
+        transition:
+          background-color 0.22s,
+          color 0.22s,
+          transform 0.22s;
+      }
+
+      nav a:hover {
+        background-color: var(--accent-soft);
+        color: var(--ink-900);
+        transform: translateY(-1px);
+      }
+
+      nav a.active {
+        background: linear-gradient(120deg, var(--accent), #f59e0b);
+        color: white;
+      }
+
+      .menu-btn {
+        display: none;
+        border: 0;
+        border-radius: 10px;
+        width: 42px;
+        height: 42px;
+        background: #fff;
+        color: var(--ink-900);
+        box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+        font-size: 1.1rem;
+        cursor: pointer;
+      }
+
+      header {
+        color: var(--ink-900);
+        padding: 6.4rem 1rem 4.8rem;
+      }
+
+      .hero-panel {
+        max-width: 1080px;
+        margin: 0 auto;
+        background: linear-gradient(
+          140deg,
+          rgba(255, 255, 255, 0.86),
+          rgba(255, 255, 255, 0.67)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 28px;
+        box-shadow: var(--shadow-soft);
+        padding: 2.3rem 1.6rem;
+        text-align: center;
+      }
+
+      header h1 {
+        margin: 0 0 14px;
+        font-family: "Space Grotesk", "Noto Sans TC", sans-serif;
+        font-size: clamp(2rem, 4.7vw, 3.3rem);
+        line-height: 1.1;
+      }
+
+      .hero-sub {
+        margin: 0 auto 18px;
+        max-width: 740px;
+        color: var(--ink-700);
+        font-size: 1.04rem;
+      }
+
+      .hero-meta {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .meta-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: #fff;
+        border: 1px solid var(--line);
+        font-weight: 700;
+        color: var(--ink-700);
+      }
+
+      header p {
+        margin: 0;
+      }
+
+      .container {
+        max-width: 1080px;
+        margin: 2rem auto 0;
+        padding: 0 16px;
+      }
+
+      section {
+        scroll-margin-top: calc(var(--nav-height) + 20px);
+        margin-bottom: 3.4rem;
+      }
+
+      .section-title {
+        color: var(--ink-900);
+        margin-bottom: 1.2rem;
+        font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+        font-family: "Space Grotesk", "Noto Sans TC", sans-serif;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 64px;
+        height: 5px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      }
+
+      .speaker-card {
+        background: var(--card);
+        backdrop-filter: blur(4px);
+        border-radius: var(--radius-lg);
+        padding: 26px;
+        margin-bottom: 18px;
+        box-shadow: var(--shadow-soft);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .speaker-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 22px 38px rgba(15, 23, 42, 0.12);
+      }
+
+      .speaker-name {
+        font-size: 1.55rem;
+        color: var(--ink-900);
+        margin: 0 0 5px 0;
+      }
+
+      .speaker-title {
+        color: var(--ink-500);
+        font-style: italic;
+        margin-bottom: 15px;
+      }
+
+      .talk-title {
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: var(--ink-700);
+      }
+
+      .abstract-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(120deg, var(--accent), #f59e0b);
+        color: white;
+        border: none;
+        padding: 11px 15px;
+        cursor: pointer;
+        border-radius: 10px;
+        font-size: 0.96rem;
+        font-weight: 700;
+        margin-top: 15px;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .abstract-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(217, 119, 6, 0.32);
+      }
+
+      .abstract-content {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        margin-top: 15px;
+        padding: 0 15px;
+        background-color: #fff;
+        border-radius: var(--radius-md);
+        border-left: 4px solid var(--accent-2);
+        font-size: 0.95rem;
+        transition:
+          max-height 0.36s ease,
+          opacity 0.28s ease,
+          padding 0.28s ease;
+      }
+
+      .abstract-content.open {
+        max-height: 420px;
+        opacity: 1;
+        padding: 14px 15px;
+      }
+
+      .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        box-shadow: var(--shadow-soft);
+        border-radius: var(--radius-lg);
+        margin-bottom: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+      }
+
+      .agenda-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: rgba(255, 255, 255, 0.94);
+        min-width: 600px;
+      }
+
+      .agenda-table th,
+      .agenda-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      }
+
+      .agenda-table th {
+        background: linear-gradient(120deg, var(--accent-2), #0f766e);
+        color: white;
+        font-size: 1.1rem;
+      }
+
+      .agenda-table tr:hover {
+        background-color: rgba(217, 119, 6, 0.08);
+      }
+
+      .time-col {
+        width: 120px;
+        font-weight: 700;
+        color: var(--accent);
+        white-space: nowrap;
+      }
+
+      .location-card {
+        background: var(--card);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-soft);
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.75);
+      }
+
+      .map-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        border-radius: var(--radius-md);
+        box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.1);
+        margin-top: 14px;
+      }
+
+      .map-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 2.5rem 1rem;
+        background: #0f172a;
+        color: white;
+        margin-top: 3rem;
+      }
+
+      .to-top {
+        position: fixed;
+        right: 18px;
+        bottom: 20px;
+        width: 46px;
+        height: 46px;
+        border: 0;
+        border-radius: 50%;
+        background: linear-gradient(140deg, var(--accent), #f59e0b);
+        color: #fff;
+        font-size: 1.2rem;
+        box-shadow: 0 14px 24px rgba(217, 119, 6, 0.3);
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(20px);
+        pointer-events: none;
+        transition: all 0.25s ease;
+      }
+
+      .to-top.show {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes floatGlow {
+        0%,
+        100% {
+          transform: translateY(0) translateX(0) scale(1);
+        }
+        50% {
+          transform: translateY(-20px) translateX(14px) scale(1.06);
+        }
+      }
+
+      @media (max-width: 768px) {
+        :root {
+          --nav-height: 64px;
+        }
+
+        nav {
+          border-radius: 0;
+          width: 100%;
+          padding: 0 10px;
+        }
+
+        .brand {
+          font-size: 0.92rem;
+        }
+
+        .menu-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .nav-links {
+          position: absolute;
+          top: calc(var(--nav-height) + 8px);
+          right: 10px;
+          width: min(260px, calc(100% - 20px));
+          background: rgba(255, 255, 255, 0.96);
+          border: 1px solid rgba(148, 163, 184, 0.2);
+          border-radius: 14px;
+          box-shadow: var(--shadow-soft);
+          flex-direction: column;
+          align-items: stretch;
+          gap: 4px;
+          padding: 8px;
+          opacity: 0;
+          transform: translateY(-6px);
+          pointer-events: none;
+          transition: all 0.25s ease;
+        }
+
+        .nav-links.open {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: auto;
+        }
+
+        nav a {
+          text-align: center;
+        }
+
+        .hero-panel {
+          padding: 1.7rem 1rem;
+        }
+
+        header h1 {
+          font-size: 2rem;
+        }
+
+        .hero-sub {
+          font-size: 0.95rem;
+        }
+
+        .speaker-card {
+          padding: 18px;
+        }
+
+        .section-title::after {
+          width: 42px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress-track" aria-hidden="true">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <nav>
+      <div class="brand">AICoE Forum 2026</div>
+      <button class="menu-btn" id="menuBtn" aria-label="切換導覽選單">
+        ☰
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">首頁</a>
+        <a href="#speakers">專題演講</a>
+        <a href="#agenda">活動議程</a>
+        <a href="#location">地點資訊</a>
+      </div>
+    </nav>
+
+    <header id="home">
+      <div class="hero-panel reveal">
+        <h1>智慧計算學門發展趨勢暨學門交流</h1>
+        <p class="hero-sub">
+          用一天的密集對話，把學研成果、產業落地與跨域資源真正串起來。
+        </p>
+        <div class="hero-meta">
+          <p class="meta-chip">📅 115年05月08日(五) 8:30~17:00</p>
+          <p class="meta-chip">📍 台中 / 清新溫泉飯店</p>
+          <p class="meta-chip">🚌 備有高鐵台中站接駁</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="speakers" class="reveal">
+        <h2 class="section-title">🎤 專題演講 (Keynotes)</h2>
+
+        <div class="speaker-card reveal">
+          <h3 class="speaker-name">Prof. Katia Sycara</h3>
+          <div class="speaker-title">
+            Edward Fredkin Research Professor of Robotics, School of Computer
+            Science, CMU
+          </div>
+          <div class="talk-title">Talk Title: Long Horizon Prediction</div>
+          <button
+            class="abstract-btn"
+            data-target="abstract-1"
+            aria-expanded="false"
+          >
+            展開摘要
+          </button>
+          <div id="abstract-1" class="abstract-content">
+            "In this talk we present our work on predicting long-horizon
+            sequence of actions from short-observation contexts. In a
+            demonstration with a robotic manipulator, we show that predicting
+            human intention in this way leads to effective collaboration between
+            humans and robots."
+          </div>
+        </div>
+
+        <div class="speaker-card reveal">
+          <h3 class="speaker-name">Prof. Michael Lewis</h3>
+          <div class="speaker-title">
+            Professor, School of Computing and Information, University of
+            Pittsburgh
+          </div>
+          <div class="talk-title">
+            Talk Title: Theory of Mind for Coordination in Search & Rescue
+          </div>
+          <button
+            class="abstract-btn"
+            data-target="abstract-2"
+            aria-expanded="false"
+          >
+            展開摘要
+          </button>
+          <div id="abstract-2" class="abstract-content">
+            "Theory of Mind entails predicting the evolving beliefs of other
+            actors often under conditions of partial observability. Predicting
+            the actions of others based on what you believe they believe to be
+            true rather than your own beliefs can improve accuracy and therefore
+            coordination. We describe three studies in which team performance is
+            improved by incorporating Theory of Mind. In the first, human agent
+            teams perform a bomb defusal task... In the second study LLMs
+            coordinate to perform the task... In the third study OverCooked
+            players infer the roles of their teammates..."
+          </div>
+        </div>
+      </section>
+
+      <section id="agenda" class="reveal">
+        <h2 class="section-title">📋 活動議程 (Agenda)</h2>
+
+        <div class="table-responsive reveal">
+          <table class="agenda-table">
+            <thead>
+              <tr>
+                <th colspan="2">上午 專題演講</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="time-col">08:30 - 09:00</td>
+                <td>報到</td>
+              </tr>
+              <tr>
+                <td class="time-col">09:00 - 09:10</td>
+                <td>開幕致詞</td>
+              </tr>
+              <tr>
+                <td class="time-col">09:10 - 10:00</td>
+                <td>
+                  Keynote Speech: Long Horizon Prediction - Prof. Katia Sycara
+                  (CMU)
+                </td>
+              </tr>
+              <tr>
+                <td class="time-col">10:00 - 10:20</td>
+                <td>Break Time</td>
+              </tr>
+              <tr>
+                <td class="time-col">10:20 - 11:10</td>
+                <td>
+                  Keynote Speech: Theory of Mind for Coordination in Search &
+                  Rescue - Prof. Michael Lewis (PITT)
+                </td>
+              </tr>
+              <tr>
+                <td class="time-col">11:10 - 12:10</td>
+                <td>專題座談</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-responsive reveal">
+          <table class="agenda-table">
+            <thead>
+              <tr>
+                <th colspan="2">
+                  下午 交流會：解鎖跨域資源,加速AI應用實戰落地
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="time-col">13:30 - 13:50</td>
+                <td>報到</td>
+              </tr>
+              <tr>
+                <td class="time-col">13:50 - 14:00</td>
+                <td>共同開場: 說明交流目的、討論原則與流程</td>
+              </tr>
+              <tr>
+                <td class="time-col">14:00 - 14:50</td>
+                <td>世界咖啡館分組討論 Round 1</td>
+              </tr>
+              <tr>
+                <td class="time-col">14:50 - 15:00</td>
+                <td>轉場休息</td>
+              </tr>
+              <tr>
+                <td class="time-col">15:00 - 15:50</td>
+                <td>
+                  世界咖啡館分組討論 Round 2
+                  (採輪轉形式,由桌長彙整討論重點,延續脈絡建立共同討論地圖)
+                </td>
+              </tr>
+              <tr>
+                <td class="time-col">15:50 - 16:20</td>
+                <td>茶會交流 (午茶時光,自由互動)</td>
+              </tr>
+              <tr>
+                <td class="time-col">16:20 - 16:40</td>
+                <td>全體共識收斂 (彙整具共識之合作主軸與未來重要議題)</td>
+              </tr>
+              <tr>
+                <td class="time-col">16:40 - 17:00</td>
+                <td>結語與會議記錄</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="location" class="reveal">
+        <h2 class="section-title">📍 地點資訊 (Location)</h2>
+        <div class="location-card">
+          <p>
+            <strong>地點：</strong>台中 / 清新溫泉飯店 (Taiwan AICoE) <br />
+            <strong>交通：</strong
+            >備有高鐵台中站來回接駁車，詳情請留意後續行前通知。
+          </p>
+          <div class="map-container">
+            <iframe
+              src="https://maps.google.com/maps?q=清新溫泉飯店&t=&z=14&ie=UTF8&iwloc=&output=embed"
+              allowfullscreen=""
+              aria-hidden="false"
+              tabindex="0"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="footer">
+      <p>主辦單位：智慧計算學門</p>
+    </div>
+
+    <button class="to-top" id="toTop" aria-label="回到頁面頂端">↑</button>
+
+    <script>
+      var navLinks = document.querySelectorAll(".nav-links a");
+      var sections = document.querySelectorAll("header[id], section[id]");
+      var progressBar = document.getElementById("progressBar");
+      var toTop = document.getElementById("toTop");
+      var menuBtn = document.getElementById("menuBtn");
+      var navLinksWrap = document.getElementById("navLinks");
+
+      function setActiveNav(id) {
+        navLinks.forEach(function (link) {
+          var target = link.getAttribute("href").replace("#", "");
+          link.classList.toggle("active", target === id);
+        });
+      }
+
+      var sectionObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActiveNav(entry.target.id);
+            }
+          });
+        },
+        {
+          threshold: 0.35,
+          rootMargin: "-16% 0px -52% 0px",
+        },
+      );
+
+      sections.forEach(function (section) {
+        sectionObserver.observe(section);
+      });
+
+      var revealObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+            }
+          });
+        },
+        { threshold: 0.18 },
+      );
+
+      document.querySelectorAll(".reveal").forEach(function (el) {
+        revealObserver.observe(el);
+      });
+
+      document.querySelectorAll(".abstract-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var id = btn.getAttribute("data-target");
+          var content = document.getElementById(id);
+          var isOpen = content.classList.contains("open");
+
+          content.classList.toggle("open", !isOpen);
+          btn.setAttribute("aria-expanded", String(!isOpen));
+          btn.textContent = isOpen ? "展開摘要" : "收合摘要";
+        });
+      });
+
+      function handleScrollUI() {
+        var scrollTop = window.scrollY;
+        var docHeight =
+          document.documentElement.scrollHeight - window.innerHeight;
+        var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+        progressBar.style.width = progress + "%";
+        toTop.classList.toggle("show", scrollTop > 320);
+      }
+
+      window.addEventListener("scroll", handleScrollUI, { passive: true });
+      handleScrollUI();
+
+      toTop.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      menuBtn.addEventListener("click", function () {
+        navLinksWrap.classList.toggle("open");
+      });
+
+      navLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+          navLinksWrap.classList.remove("open");
+        });
+      });
+
+      document.addEventListener("click", function (event) {
+        var clickedOutsideNav = !event.target.closest("nav");
+        if (clickedOutsideNav) {
+          navLinksWrap.classList.remove("open");
+        }
+      });
+    </script>
+  </body>
+</html>
