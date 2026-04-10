@@ -197,6 +197,57 @@
         gap: 12px;
       }
 
+      .poster-section {
+        position: relative;
+        margin-bottom: 0;
+      }
+
+      .feature-grid {
+        display: block;
+      }
+
+      .poster-wrap {
+        position: relative;
+        background: var(--card);
+        border-radius: 26px;
+        border: 1px solid rgba(255, 255, 255, 0.75);
+        box-shadow: var(--shadow-soft);
+        padding: 20px;
+        overflow: hidden;
+      }
+
+      .poster-wrap::before {
+        content: "";
+        position: absolute;
+        top: -90px;
+        right: -40px;
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(217, 119, 6, 0.2) 0%,
+          rgba(217, 119, 6, 0) 70%
+        );
+        pointer-events: none;
+      }
+
+      .poster-stage {
+        position: relative;
+        margin: 0;
+        width: 100%;
+        border-radius: 18px;
+        border: 1px solid rgba(15, 23, 42, 0.16);
+        box-shadow: 0 18px 30px rgba(15, 23, 42, 0.12);
+        overflow: hidden;
+      }
+
+      .poster-image {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
       .meta-chip {
         display: inline-flex;
         align-items: center;
@@ -222,6 +273,10 @@
       section {
         scroll-margin-top: calc(var(--nav-height) + 20px);
         margin-bottom: 3.4rem;
+      }
+
+      #speakers {
+        margin-bottom: 0;
       }
 
       .section-title {
@@ -393,11 +448,73 @@
       }
 
       .footer {
-        text-align: center;
-        padding: 2.5rem 1rem;
-        background: #0f172a;
-        color: white;
+        padding: 2.8rem 1rem 1.2rem;
+        background: linear-gradient(
+          180deg,
+          rgba(239, 246, 255, 0.92),
+          rgba(232, 241, 248, 0.96)
+        );
+        border-top: 1px solid rgba(148, 163, 184, 0.22);
+        color: var(--ink-700);
         margin-top: 3rem;
+      }
+
+      .footer-inner {
+        max-width: 1080px;
+        margin: 0 auto;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0;
+        border-top: 1px solid rgba(148, 163, 184, 0.26);
+        border-bottom: 1px solid rgba(148, 163, 184, 0.26);
+      }
+
+      .footer-block {
+        padding: 16px 18px 14px;
+      }
+
+      .footer-block + .footer-block {
+        border-left: 1px solid rgba(148, 163, 184, 0.26);
+      }
+
+      .footer-label {
+        margin: 0 0 8px;
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
+        color: var(--ink-500);
+      }
+
+      .footer-value {
+        margin: 0;
+        font-size: 1.02rem;
+        font-weight: 700;
+        color: var(--ink-900);
+      }
+
+      .footer-contact {
+        margin-top: 12px;
+        padding: 8px 2px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        color: var(--ink-700);
+        font-size: 0.92rem;
+      }
+
+      .footer-contact strong {
+        color: var(--accent-2);
+      }
+
+      .footer-dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 999px;
+        background: rgba(100, 116, 139, 0.7);
       }
 
       .to-top {
@@ -513,6 +630,61 @@
         .section-title::after {
           width: 42px;
         }
+
+        .poster-wrap {
+          padding: 16px;
+        }
+
+        .poster-stage {
+          width: min(360px, 100%);
+          margin: 0 auto;
+        }
+
+        .footer {
+          padding: 2.2rem 0.9rem 1rem;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr;
+          border-bottom: 0;
+        }
+
+        .footer-block {
+          padding: 12px 2px;
+        }
+
+        .footer-block + .footer-block {
+          border-left: 0;
+          border-top: 1px solid rgba(148, 163, 184, 0.26);
+        }
+
+        .footer-contact {
+          justify-content: flex-start;
+          gap: 8px;
+        }
+
+        .footer-dot {
+          display: none;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .feature-grid {
+          display: grid;
+          grid-template-columns: minmax(360px, 0.95fr) minmax(0, 1.05fr);
+          gap: 26px;
+          align-items: start;
+          margin-bottom: 3.4rem;
+        }
+
+        .feature-grid > section {
+          margin-bottom: 0;
+        }
+
+        #speakers .section-title,
+        #poster .section-title {
+          min-height: 56px;
+        }
       }
     </style>
   </head>
@@ -528,6 +700,7 @@
       </button>
       <div class="nav-links" id="navLinks">
         <a href="#home">首頁</a>
+        <a href="#poster">活動海報</a>
         <a href="#speakers">專題演講</a>
         <a href="#agenda">活動議程</a>
         <a href="#location">地點資訊</a>
@@ -549,64 +722,79 @@
     </header>
 
     <div class="container">
-      <section id="speakers" class="reveal">
-        <h2 class="section-title">🎤 專題演講 (Keynotes)</h2>
+      <div class="feature-grid">
+        <section id="poster" class="poster-section reveal">
+          <h2 class="section-title">活動海報 (Poster)</h2>
+          <div class="poster-wrap reveal">
+            <div class="poster-stage" aria-label="活動海報展示區">
+              <img
+                class="poster-image"
+                src="images/poster.jpg"
+                alt="智慧計算學門發展趨勢暨學門交流會活動海報"
+              />
+            </div>
+          </div>
+        </section>
 
-        <div class="speaker-card reveal">
-          <h3 class="speaker-name">Prof. Katia Sycara</h3>
-          <div class="speaker-title">
-            Edward Fredkin Research Professor of Robotics, School of Computer
-            Science, CMU
-          </div>
-          <div class="talk-title">Talk Title: Long Horizon Prediction</div>
-          <button
-            class="abstract-btn"
-            data-target="abstract-1"
-            aria-expanded="false"
-          >
-            展開摘要
-          </button>
-          <div id="abstract-1" class="abstract-content">
-            "In this talk we present our work on predicting long-horizon
-            sequence of actions from short-observation contexts. In a
-            demonstration with a robotic manipulator, we show that predicting
-            human intention in this way leads to effective collaboration between
-            humans and robots."
-          </div>
-        </div>
+        <section id="speakers" class="reveal">
+          <h2 class="section-title">專題演講 (Keynotes)</h2>
 
-        <div class="speaker-card reveal">
-          <h3 class="speaker-name">Prof. Michael Lewis</h3>
-          <div class="speaker-title">
-            Professor, School of Computing and Information, University of
-            Pittsburgh
+          <div class="speaker-card reveal">
+            <h3 class="speaker-name">Prof. Katia Sycara</h3>
+            <div class="speaker-title">
+              Edward Fredkin Research Professor of Robotics, School of Computer
+              Science, CMU
+            </div>
+            <div class="talk-title">Talk Title: Long Horizon Prediction</div>
+            <button
+              class="abstract-btn"
+              data-target="abstract-1"
+              aria-expanded="false"
+            >
+              展開摘要
+            </button>
+            <div id="abstract-1" class="abstract-content">
+              "In this talk we present our work on predicting long-horizon
+              sequence of actions from short-observation contexts. In a
+              demonstration with a robotic manipulator, we show that predicting
+              human intention in this way leads to effective collaboration
+              between humans and robots."
+            </div>
           </div>
-          <div class="talk-title">
-            Talk Title: Theory of Mind for Coordination in Search & Rescue
+
+          <div class="speaker-card reveal">
+            <h3 class="speaker-name">Prof. Michael Lewis</h3>
+            <div class="speaker-title">
+              Professor, School of Computing and Information, University of
+              Pittsburgh
+            </div>
+            <div class="talk-title">
+              Talk Title: Theory of Mind for Coordination in Search & Rescue
+            </div>
+            <button
+              class="abstract-btn"
+              data-target="abstract-2"
+              aria-expanded="false"
+            >
+              展開摘要
+            </button>
+            <div id="abstract-2" class="abstract-content">
+              "Theory of Mind entails predicting the evolving beliefs of other
+              actors often under conditions of partial observability. Predicting
+              the actions of others based on what you believe they believe to be
+              true rather than your own beliefs can improve accuracy and
+              therefore coordination. We describe three studies in which team
+              performance is improved by incorporating Theory of Mind. In the
+              first, human agent teams perform a bomb defusal task... In the
+              second study LLMs coordinate to perform the task... In the third
+              study OverCooked players infer the roles of their teammates..."
+            </div>
           </div>
-          <button
-            class="abstract-btn"
-            data-target="abstract-2"
-            aria-expanded="false"
-          >
-            展開摘要
-          </button>
-          <div id="abstract-2" class="abstract-content">
-            "Theory of Mind entails predicting the evolving beliefs of other
-            actors often under conditions of partial observability. Predicting
-            the actions of others based on what you believe they believe to be
-            true rather than your own beliefs can improve accuracy and therefore
-            coordination. We describe three studies in which team performance is
-            improved by incorporating Theory of Mind. In the first, human agent
-            teams perform a bomb defusal task... In the second study LLMs
-            coordinate to perform the task... In the third study OverCooked
-            players infer the roles of their teammates..."
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       <section id="agenda" class="reveal">
-        <h2 class="section-title">📋 活動議程 (Agenda)</h2>
+        <h2 class="section-title">活動議程 (Agenda)</h2>
 
         <div class="table-responsive reveal">
           <table class="agenda-table">
@@ -701,10 +889,10 @@
       </section>
 
       <section id="location" class="reveal">
-        <h2 class="section-title">📍 地點資訊 (Location)</h2>
+        <h2 class="section-title">地點資訊 (Location)</h2>
         <div class="location-card">
           <p>
-            <strong>地點：</strong>台中 / 清新溫泉飯店 (Taiwan AICoE) <br />
+            <strong>地點：</strong>台中 / 清新溫泉飯店 <br />
             <strong>交通：</strong
             >備有高鐵台中站來回接駁車，詳情請留意後續行前通知。
           </p>
@@ -721,7 +909,32 @@
     </div>
 
     <div class="footer">
-      <p>主辦單位：智慧計算學門</p>
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-block">
+            <p class="footer-label">主辦單位</p>
+            <p class="footer-value">國科會智慧計算學門</p>
+          </div>
+          <div class="footer-block">
+            <p class="footer-label">協辦單位</p>
+            <p class="footer-value">AI 卓越中心 (AICoE)</p>
+          </div>
+          <div class="footer-block">
+            <p class="footer-label">指導單位</p>
+            <p class="footer-value">國家科學及技術委員會</p>
+          </div>
+        </div>
+
+        <div class="footer-contact" aria-label="活動聯絡資訊">
+          <strong>活動聯繫</strong>
+          <span class="footer-dot" aria-hidden="true"></span>
+          <span>vicky945@ncu.edu.tw</span>
+          <span class="footer-dot" aria-hidden="true"></span>
+          <span>03-4227151 #35348</span>
+          <span class="footer-dot" aria-hidden="true"></span>
+          <span>陳小姐</span>
+        </div>
+      </div>
     </div>
 
     <button class="to-top" id="toTop" aria-label="回到頁面頂端">↑</button>
