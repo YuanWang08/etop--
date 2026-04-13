@@ -337,24 +337,61 @@
       .abstract-btn {
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 8px;
         background: linear-gradient(120deg, var(--accent), #f59e0b);
         color: white;
         border: none;
-        padding: 11px 15px;
+        padding: 0 16px;
+        min-height: 50px;
         cursor: pointer;
         border-radius: 10px;
-        font-size: 0.96rem;
+        font-size: 0.95rem;
+        line-height: 1;
         font-weight: 700;
-        margin-top: 15px;
         transition:
           transform 0.2s,
           box-shadow 0.2s;
       }
 
+      .speaker-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 15px;
+      }
+
       .abstract-btn:hover {
         transform: translateY(-2px);
         box-shadow: 0 10px 20px rgba(217, 119, 6, 0.32);
+      }
+
+      .download-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-decoration: none;
+        color: var(--ink-900);
+        border: 1px solid rgba(15, 23, 42, 0.18);
+        background: rgba(255, 255, 255, 0.92);
+        padding: 0 16px;
+        min-height: 50px;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        line-height: 1;
+        font-weight: 700;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s,
+          border-color 0.2s;
+      }
+
+      .download-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+        border-color: rgba(15, 118, 110, 0.48);
       }
 
       .abstract-content {
@@ -428,6 +465,38 @@
         border: 1px solid rgba(255, 255, 255, 0.75);
       }
 
+      .location-line {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .location-link-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 34px;
+        padding: 0 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(15, 23, 42, 0.18);
+        background: #fff;
+        color: var(--ink-900);
+        font-size: 0.88rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s,
+          border-color 0.2s;
+      }
+
+      .location-link-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 16px rgba(15, 23, 42, 0.12);
+        border-color: rgba(15, 118, 110, 0.48);
+      }
+
       .map-container {
         position: relative;
         padding-bottom: 56.25%;
@@ -462,6 +531,8 @@
       .footer-inner {
         max-width: 1080px;
         margin: 0 auto;
+        position: relative;
+        padding-bottom: 2.1rem;
       }
 
       .footer-grid {
@@ -515,6 +586,25 @@
         height: 4px;
         border-radius: 999px;
         background: rgba(100, 116, 139, 0.7);
+      }
+
+      .visit-counter {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        background: rgba(255, 255, 255, 0.82);
+        color: var(--ink-700);
+        font-size: 0.86rem;
+      }
+
+      .visit-counter strong {
+        color: var(--accent-2);
       }
 
       .to-top {
@@ -666,6 +756,16 @@
         .footer-dot {
           display: none;
         }
+
+        .footer-inner {
+          padding-bottom: 0;
+        }
+
+        .visit-counter {
+          position: static;
+          margin-top: 14px;
+          justify-content: flex-end;
+        }
       }
 
       @media (min-width: 1024px) {
@@ -746,13 +846,16 @@
               Science, CMU
             </div>
             <div class="talk-title">Talk Title: Long Horizon Prediction</div>
-            <button
-              class="abstract-btn"
-              data-target="abstract-1"
-              aria-expanded="false"
-            >
-              展開摘要
-            </button>
+            <div class="speaker-actions">
+              <button
+                class="abstract-btn"
+                data-target="abstract-1"
+                aria-expanded="false"
+              >
+                Abstract
+              </button>
+              <a class="download-btn" href="Katia_CV.pdf" download> 下載 CV </a>
+            </div>
             <div id="abstract-1" class="abstract-content">
               "In this talk we present our work on predicting long-horizon
               sequence of actions from short-observation contexts. In a
@@ -771,13 +874,16 @@
             <div class="talk-title">
               Talk Title: Theory of Mind for Coordination in Search & Rescue
             </div>
-            <button
-              class="abstract-btn"
-              data-target="abstract-2"
-              aria-expanded="false"
-            >
-              展開摘要
-            </button>
+            <div class="speaker-actions">
+              <button
+                class="abstract-btn"
+                data-target="abstract-2"
+                aria-expanded="false"
+              >
+                Abstract
+              </button>
+              <a class="download-btn" href="Mike_CV.pdf" download> 下載 CV </a>
+            </div>
             <div id="abstract-2" class="abstract-content">
               "Theory of Mind entails predicting the evolving beliefs of other
               actors often under conditions of partial observability. Predicting
@@ -785,9 +891,15 @@
               true rather than your own beliefs can improve accuracy and
               therefore coordination. We describe three studies in which team
               performance is improved by incorporating Theory of Mind. In the
-              first, human agent teams perform a bomb defusal task... In the
-              second study LLMs coordinate to perform the task... In the third
-              study OverCooked players infer the roles of their teammates..."
+              first, human agent teams perform a bomb defusal task in which
+              agents have access to different tools which must be applied in
+              particular sequences. An advisor models the beliefs of the human
+              participant to identify situations to intervene in which the human
+              is expected to make the wrong decision. In the second study LLMs
+              coordinate to perform the task and when prompted to update models
+              of one another's beliefs reach a solution in half the time. In the
+              third study OverCooked players infer the roles of their teammates
+              to predict their actions allowing few-shot adaptation."
             </div>
           </div>
         </section>
@@ -842,9 +954,7 @@
           <table class="agenda-table">
             <thead>
               <tr>
-                <th colspan="2">
-                  下午 交流會：解鎖跨域資源,加速AI應用實戰落地
-                </th>
+                <th colspan="2">下午 交流會</th>
               </tr>
             </thead>
             <tbody>
@@ -892,7 +1002,18 @@
         <h2 class="section-title">地點資訊 (Location)</h2>
         <div class="location-card">
           <p>
-            <strong>地點：</strong>台中 / 清新溫泉飯店 <br />
+            <span class="location-line">
+              <strong>地點：</strong>台中 / 清新溫泉飯店
+              <a
+                class="location-link-btn"
+                href="https://www.freshfields.com.tw/?gad_source=1&gad_campaignid=23498404932&gbraid=0AAAAADJBGUjKPDCzRQjyE8l91ZRFsIV74&gclid=CjwKCAjwhe3OBhABEiwA6392zD6HfdMLJ-5WEK0LJyYo85OIj6h4UDaui12CphCiyu0KKu5jTH-eNxoCvfIQAvD_BwE"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                前往飯店網站
+              </a>
+            </span>
+            <br />
             <strong>交通：</strong
             >備有高鐵台中站來回接駁車，詳情請留意後續行前通知。
           </p>
@@ -933,6 +1054,11 @@
           <span>03-4227151 #35348</span>
           <span class="footer-dot" aria-hidden="true"></span>
           <span>陳小姐</span>
+        </div>
+
+        <div class="visit-counter" aria-live="polite" aria-label="頁面拜訪統計">
+          <span>網站累計拜訪：</span>
+          <strong id="visitCountValue">讀取中...</strong>
         </div>
       </div>
     </div>
@@ -995,7 +1121,6 @@
 
           content.classList.toggle("open", !isOpen);
           btn.setAttribute("aria-expanded", String(!isOpen));
-          btn.textContent = isOpen ? "展開摘要" : "收合摘要";
         });
       });
 
@@ -1032,6 +1157,44 @@
           navLinksWrap.classList.remove("open");
         }
       });
+
+      var visitCountValue = document.getElementById("visitCountValue");
+
+      function loadVisitCount() {
+        if (!visitCountValue) return;
+
+        var apiUrl = "https://etop.goatcounter.com/counter/TOTAL.json";
+
+        fetch(apiUrl, {
+          headers: { Accept: "application/json" },
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            var countText = String((data && data.count) || "").replace(
+              /,/g,
+              "",
+            );
+            var count = Number(countText);
+            if (!Number.isNaN(count)) {
+              visitCountValue.textContent = count.toLocaleString("zh-TW");
+            } else {
+              visitCountValue.textContent = "尚無資料";
+            }
+          })
+          .catch(function () {
+            visitCountValue.textContent = "讀取失敗";
+          });
+      }
+
+      loadVisitCount();
     </script>
+
+    <script
+      data-goatcounter="https://etop.goatcounter.com/count"
+      async
+      src="https://gc.zgo.at/count.js"
+    ></script>
   </body>
 </html>
