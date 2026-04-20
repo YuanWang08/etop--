@@ -316,6 +316,40 @@
         box-shadow: 0 22px 38px rgba(15, 23, 42, 0.12);
       }
 
+      .speaker-top {
+        display: grid;
+        grid-template-columns: 124px minmax(0, 1fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .speaker-photo {
+        width: 124px;
+        height: 124px;
+        border-radius: 16px;
+        object-fit: cover;
+        border: 1px solid rgba(15, 23, 42, 0.14);
+        box-shadow: 0 10px 18px rgba(15, 23, 42, 0.14);
+      }
+
+      .speaker-bio p {
+        margin: 0 0 12px;
+      }
+
+      .speaker-bio p:last-child {
+        margin-bottom: 0;
+      }
+
+      .content-label {
+        display: inline-block;
+        margin: 16px 0 8px;
+        font-size: 0.88rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: var(--accent-2);
+        text-transform: uppercase;
+      }
+
       .speaker-name {
         font-size: 1.55rem;
         color: var(--ink-900);
@@ -478,9 +512,9 @@
         min-height: 34px;
         padding: 0 12px;
         border-radius: 999px;
-        border: 1px solid rgba(15, 23, 42, 0.18);
-        background: #fff;
-        color: var(--ink-900);
+        border: 1px solid rgba(2, 132, 199, 0.4);
+        background: linear-gradient(120deg, #0284c7, #0ea5e9);
+        color: #fff;
         font-size: 0.88rem;
         font-weight: 700;
         text-decoration: none;
@@ -492,8 +526,52 @@
 
       .location-link-btn:hover {
         transform: translateY(-1px);
-        box-shadow: 0 8px 16px rgba(15, 23, 42, 0.12);
-        border-color: rgba(15, 118, 110, 0.48);
+        box-shadow: 0 10px 18px rgba(2, 132, 199, 0.35);
+        border-color: rgba(2, 132, 199, 0.8);
+      }
+
+      .forum-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .forum-card {
+        background: var(--card);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-soft);
+        border: 1px solid rgba(255, 255, 255, 0.75);
+        padding: 22px;
+      }
+
+      .forum-title {
+        margin: 0 0 8px;
+        color: var(--ink-900);
+        font-size: 1.2rem;
+      }
+
+      .forum-lead {
+        margin: 0 0 12px;
+        color: var(--ink-700);
+        font-weight: 600;
+      }
+
+      .forum-list {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .forum-list li {
+        margin-bottom: 8px;
+      }
+
+      .forum-note {
+        margin-top: 14px;
+        padding: 12px 14px;
+        border-radius: var(--radius-md);
+        background: rgba(2, 132, 199, 0.08);
+        border: 1px solid rgba(2, 132, 199, 0.24);
+        color: var(--ink-700);
       }
 
       .map-container {
@@ -716,6 +794,18 @@
           padding: 18px;
         }
 
+        .speaker-top {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+
+        .speaker-photo {
+          width: 100%;
+          max-width: 240px;
+          height: auto;
+          aspect-ratio: 1 / 1;
+        }
+
         .section-title::after {
           width: 42px;
         }
@@ -765,6 +855,10 @@
           margin-top: 14px;
           justify-content: flex-end;
         }
+
+        .forum-grid {
+          grid-template-columns: 1fr;
+        }
       }
 
       @media (min-width: 1024px) {
@@ -801,6 +895,8 @@
         <a href="#home">首頁</a>
         <a href="#poster">活動海報</a>
         <a href="#speakers">專題演講</a>
+        <a href="#panel-discussion">專題座談</a>
+        <a href="#networking">交流活動</a>
         <a href="#agenda">活動議程</a>
         <a href="#location">地點資訊</a>
       </div>
@@ -839,70 +935,159 @@
           <h2 class="section-title">專題演講 (Keynotes)</h2>
 
           <div class="speaker-card reveal">
-            <h3 class="speaker-name">Prof. Katia Sycara</h3>
-            <div class="speaker-title">
-              Edward Fredkin Research Professor of Robotics, School of Computer
-              Science, CMU
+            <div class="speaker-top">
+              <img
+                class="speaker-photo"
+                src="images/Katia.png"
+                alt="Prof. Katia Sycara"
+              />
+              <div>
+                <h3 class="speaker-name">Prof. Katia Sycara</h3>
+                <div class="speaker-title">
+                  Edward Fredkin Research Professor of Robotics, School of
+                  Computer Science, Carnegie Mellon University
+                </div>
+                <div class="talk-title">Title: Long Horizon Prediction</div>
+              </div>
             </div>
-            <div class="talk-title">Talk Title: Long Horizon Prediction</div>
-            <div class="speaker-actions">
-              <button
-                class="abstract-btn"
-                data-target="abstract-1"
-                aria-expanded="false"
-              >
-                Abstract
-              </button>
-              <a class="download-btn" href="Katia_CV.pdf" download>CV</a>
-            </div>
-            <div id="abstract-1" class="abstract-content">
-              "In this talk we present our work on predicting long-horizon
-              sequence of actions from short-observation contexts. In a
-              demonstration with a robotic manipulator, we show that predicting
-              human intention in this way leads to effective collaboration
-              between humans and robots."
+            <div class="speaker-bio">
+              <div class="content-label">Abstract</div>
+              <p>
+                "In this talk we present our work on predicting long-horizon
+                sequence of actions from short-observation contexts. In a
+                demonstration with a robotic manipulator, we show that
+                predicting human intention in this way leads to effective
+                collaboration between humans and robots."
+              </p>
+
+              <div class="content-label">Biodata</div>
+              <p>
+                Katia Sycara is the Edward Fredkin Research Professor in the
+                School of Computer Science at Carnegie Mellon University and a
+                Research Professor at the Robotics Institute. She is a leading
+                expert in artificial intelligence, multi-agent systems, and
+                human-agent collaboration.
+              </p>
+              <p>
+                Her research spans AI autonomy, distributed intelligent systems,
+                and trust in human-AI interaction, with applications in
+                robotics, defense, and large-scale information systems. She has
+                been a pioneer in agent-based systems and has made significant
+                contributions to semantic web technologies and collaborative AI.
+              </p>
+              <p>
+                Professor Sycara has received numerous honors, including
+                recognition as a Fellow of the Association for the Advancement
+                of Artificial Intelligence and the Institute of Electrical and
+                Electronics Engineers. She has also served in key advisory roles
+                for government and international research initiatives, and her
+                work has had a lasting impact on the development of intelligent,
+                cooperative systems.
+              </p>
             </div>
           </div>
 
           <div class="speaker-card reveal">
-            <h3 class="speaker-name">Prof. Michael Lewis</h3>
-            <div class="speaker-title">
-              Professor, School of Computing and Information, University of
-              Pittsburgh
+            <div class="speaker-top">
+              <img
+                class="speaker-photo"
+                src="images/Mike.jpg"
+                alt="Prof. Michael Lewis"
+              />
+              <div>
+                <h3 class="speaker-name">Prof. Michael Lewis</h3>
+                <div class="speaker-title">
+                  School of Computing and Information, Department of Informatics
+                  and Networked Systems, University of Pittsburgh
+                </div>
+                <div class="talk-title">
+                  Title: Theory of Mind for Coordination in Search &amp; Rescue
+                </div>
+              </div>
             </div>
-            <div class="talk-title">
-              Talk Title: Theory of Mind for Coordination in Search & Rescue
-            </div>
-            <div class="speaker-actions">
-              <button
-                class="abstract-btn"
-                data-target="abstract-2"
-                aria-expanded="false"
-              >
-                Abstract
-              </button>
-              <a class="download-btn" href="Mike_CV.pdf" download>CV</a>
-            </div>
-            <div id="abstract-2" class="abstract-content">
-              "Theory of Mind entails predicting the evolving beliefs of other
-              actors often under conditions of partial observability. Predicting
-              the actions of others based on what you believe they believe to be
-              true rather than your own beliefs can improve accuracy and
-              therefore coordination. We describe three studies in which team
-              performance is improved by incorporating Theory of Mind. In the
-              first, human agent teams perform a bomb defusal task in which
-              agents have access to different tools which must be applied in
-              particular sequences. An advisor models the beliefs of the human
-              participant to identify situations to intervene in which the human
-              is expected to make the wrong decision. In the second study LLMs
-              coordinate to perform the task and when prompted to update models
-              of one another's beliefs reach a solution in half the time. In the
-              third study OverCooked players infer the roles of their teammates
-              to predict their actions allowing few-shot adaptation."
+            <div class="speaker-bio">
+              <div class="content-label">Abstract</div>
+              <p>
+                "Theory of Mind entails predicting the evolving beliefs of other
+                actors often under conditions of partial observability.
+                Predicting the actions of others based on what you believe they
+                believe to be true rather than your own beliefs can improve
+                accuracy and therefore coordination. We describe three studies
+                in which team performance is improved by incorporating Theory of
+                Mind. In the first, human agent teams perform a bomb defusal
+                task in which agents have access to different tools which must
+                be applied in particular sequences. An advisor models the
+                beliefs of the human participant to identify situations to
+                intervene in which the human is expected to make the wrong
+                decision. In the second study LLMs coordinate to perform the
+                task and when prompted to update models of one another's beliefs
+                reach a solution in half the time. In the third study OverCooked
+                players infer the roles of their teammates to predict their
+                actions allowing few-shot adaptation."
+              </p>
+
+              <div class="content-label">Biodata</div>
+              <p>
+                Michael Lewis is a Professor at the School of Computing and
+                Information at the University of Pittsburgh. Trained in
+                engineering psychology, his research focuses on human-computer
+                interaction, human-agent teaming, and swarm robotics. He
+                investigates how humans interact with complex autonomous
+                systems, with particular emphasis on trust, decision-making, and
+                coordination in multi-agent environments.
+              </p>
+              <p>
+                His work integrates artificial intelligence, visualization, and
+                human factors to improve the effectiveness of human-AI
+                collaboration. Professor Lewis has led and contributed to
+                numerous research projects supported by agencies such as DARPA,
+                NSF, and other U.S. government organizations. He has published
+                extensively in leading journals and conferences in human-machine
+                systems, robotics, and AI.
+              </p>
             </div>
           </div>
         </section>
       </div>
+
+      <section id="panel-discussion" class="reveal">
+        <h2 class="section-title">專題座談</h2>
+        <div class="forum-card reveal">
+          <h3 class="forum-title">與談者陣容</h3>
+          <p class="forum-lead">專題座談「資源對接、AI落地應用」</p>
+          <ul class="forum-list">
+            <li>國家運動中心 黃進來 副處長</li>
+            <li>新北市教育局 張明文 局長</li>
+            <li>海洋大學 許為元 教授</li>
+            <li>主持人：洪盟峯 教授</li>
+          </ul>
+          <p class="forum-note">
+            由三位來自不同領域的產官學代表，解鎖跨域資源，加速 AI 應用實戰落地。
+          </p>
+        </div>
+      </section>
+
+      <section id="networking" class="reveal">
+        <h2 class="section-title">交流活動</h2>
+        <div class="forum-grid reveal">
+          <div class="forum-card">
+            <h3 class="forum-title">世界咖啡廳</h3>
+            <p class="forum-lead">桌長</p>
+            <ul class="forum-list">
+              <li>洪盟峯老師 / 高雄科技大學</li>
+              <li>盧文祥老師 / 成功大學</li>
+              <li>謝君偉老師 / 陽明交通大學</li>
+              <li>陳宜欣老師 / 清華大學</li>
+            </ul>
+          </div>
+          <div class="forum-card">
+            <h3 class="forum-title">交流目標</h3>
+            <p>
+              透過分組輪轉、重點彙整與跨組分享，串連不同領域觀點，形成可行的合作主軸與後續行動方向。
+            </p>
+          </div>
+        </div>
+      </section>
 
       <section id="agenda" class="reveal">
         <h2 class="section-title">活動議程 (Agenda)</h2>
@@ -958,39 +1143,40 @@
             </thead>
             <tbody>
               <tr>
-                <td class="time-col">13:30 - 13:50</td>
+                <td class="time-col">13:30 - 14:00</td>
                 <td>報到</td>
               </tr>
               <tr>
-                <td class="time-col">13:50 - 14:00</td>
-                <td>共同開場: 說明交流目的、討論原則與流程</td>
+                <td class="time-col">14:00 - 14:10</td>
+                <td>共同開場：說明交流目的、原則與流程</td>
               </tr>
               <tr>
-                <td class="time-col">14:00 - 14:50</td>
-                <td>世界咖啡館分組討論 Round 1</td>
+                <td class="time-col">14:10 - 14:40</td>
+                <td>Round 1：初步探索</td>
               </tr>
               <tr>
-                <td class="time-col">14:50 - 15:00</td>
-                <td>轉場休息</td>
+                <td class="time-col">14:40 - 15:10</td>
+                <td>Round 2：觀點串連</td>
               </tr>
               <tr>
-                <td class="time-col">15:00 - 15:50</td>
-                <td>
-                  世界咖啡館分組討論 Round 2
-                  (採輪轉形式,由桌長彙整討論重點,延續脈絡建立共同討論地圖)
-                </td>
+                <td class="time-col">15:10 - 15:30</td>
+                <td>茶會交流（午茶時光，自由交流互動）</td>
               </tr>
               <tr>
-                <td class="time-col">15:50 - 16:20</td>
-                <td>茶會交流 (午茶時光,自由互動)</td>
+                <td class="time-col">15:30 - 16:00</td>
+                <td>Round 3：共識收斂</td>
               </tr>
               <tr>
-                <td class="time-col">16:20 - 16:40</td>
-                <td>全體共識收斂 (彙整具共識之合作主軸與未來重要議題)</td>
+                <td class="time-col">16:00 - 16:40</td>
+                <td>各組分享結論（每組約 10 分鐘，由桌長或組員代表分享）</td>
               </tr>
               <tr>
-                <td class="time-col">16:40 - 17:00</td>
-                <td>結語與會議記錄</td>
+                <td class="time-col">16:40 - 16:50</td>
+                <td>活動結語</td>
+              </tr>
+              <tr>
+                <td class="time-col">16:50</td>
+                <td>準備賦歸</td>
               </tr>
             </tbody>
           </table>
@@ -1110,17 +1296,6 @@
 
       document.querySelectorAll(".reveal").forEach(function (el) {
         revealObserver.observe(el);
-      });
-
-      document.querySelectorAll(".abstract-btn").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          var id = btn.getAttribute("data-target");
-          var content = document.getElementById(id);
-          var isOpen = content.classList.contains("open");
-
-          content.classList.toggle("open", !isOpen);
-          btn.setAttribute("aria-expanded", String(!isOpen));
-        });
       });
 
       function handleScrollUI() {
