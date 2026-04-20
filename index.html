@@ -216,6 +216,32 @@
         overflow: hidden;
       }
 
+      .poster-zoom-btn {
+        margin-top: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        padding: 0 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(15, 118, 110, 0.36);
+        background: rgba(15, 118, 110, 0.08);
+        color: var(--accent-2);
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          background-color 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .poster-zoom-btn:hover {
+        transform: translateY(-1px);
+        background: rgba(15, 118, 110, 0.14);
+        box-shadow: 0 8px 16px rgba(15, 118, 110, 0.18);
+      }
+
       .poster-wrap::before {
         content: "";
         position: absolute;
@@ -246,6 +272,53 @@
         display: block;
         width: 100%;
         height: auto;
+        cursor: zoom-in;
+      }
+
+      .poster-lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(2, 6, 23, 0.84);
+        z-index: 1300;
+        display: grid;
+        place-items: center;
+        padding: 20px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+      }
+
+      .poster-lightbox.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .poster-lightbox-content {
+        position: relative;
+        width: min(92vw, 820px);
+      }
+
+      .poster-lightbox-image {
+        display: block;
+        width: 100%;
+        border-radius: 16px;
+        box-shadow: 0 24px 50px rgba(2, 6, 23, 0.5);
+      }
+
+      .poster-lightbox-close {
+        position: absolute;
+        top: -16px;
+        right: -16px;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 0;
+        background: #fff;
+        color: var(--ink-900);
+        font-size: 1.2rem;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 10px 22px rgba(2, 6, 23, 0.35);
       }
 
       .meta-chip {
@@ -819,6 +892,11 @@
           margin: 0 auto;
         }
 
+        .poster-lightbox-close {
+          top: -12px;
+          right: -8px;
+        }
+
         .footer {
           padding: 2.2rem 0.9rem 1rem;
         }
@@ -864,10 +942,21 @@
       @media (min-width: 1024px) {
         .feature-grid {
           display: grid;
-          grid-template-columns: minmax(360px, 0.95fr) minmax(0, 1.05fr);
+          grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.22fr);
           gap: 26px;
           align-items: start;
           margin-bottom: 3.4rem;
+        }
+
+        .poster-section {
+          position: sticky;
+          top: calc(var(--nav-height) + 14px);
+          align-self: start;
+        }
+
+        .poster-wrap {
+          max-width: 430px;
+          margin: 0 auto;
         }
 
         .feature-grid > section {
@@ -923,11 +1012,15 @@
           <div class="poster-wrap reveal">
             <div class="poster-stage" aria-label="活動海報展示區">
               <img
+                id="posterImage"
                 class="poster-image"
                 src="images/poster.jpg"
                 alt="智慧計算學門發展趨勢暨學門交流會活動海報"
               />
             </div>
+            <button class="poster-zoom-btn" id="posterZoomBtn" type="button">
+              點擊放大海報
+            </button>
           </div>
         </section>
 
@@ -1223,7 +1316,7 @@
           </div>
           <div class="footer-block">
             <p class="footer-label">協辦單位</p>
-            <p class="footer-value">AI 卓越中心 (AICoE)</p>
+            <p class="footer-value">台灣 AI 卓越中心 (Taiwan AICoE)</p>
           </div>
           <div class="footer-block">
             <p class="footer-label">指導單位</p>
@@ -1248,6 +1341,29 @@
       </div>
     </div>
 
+    <div class="poster-lightbox" id="posterLightbox" aria-hidden="true">
+      <div
+        class="poster-lightbox-content"
+        role="dialog"
+        aria-modal="true"
+        aria-label="活動海報放大預覽"
+      >
+        <button
+          class="poster-lightbox-close"
+          id="posterLightboxClose"
+          type="button"
+          aria-label="關閉海報放大預覽"
+        >
+          ×
+        </button>
+        <img
+          class="poster-lightbox-image"
+          src="images/poster.jpg"
+          alt="活動海報放大圖"
+        />
+      </div>
+    </div>
+
     <button class="to-top" id="toTop" aria-label="回到頁面頂端">↑</button>
 
     <script>
@@ -1257,6 +1373,10 @@
       var toTop = document.getElementById("toTop");
       var menuBtn = document.getElementById("menuBtn");
       var navLinksWrap = document.getElementById("navLinks");
+      var posterImage = document.getElementById("posterImage");
+      var posterZoomBtn = document.getElementById("posterZoomBtn");
+      var posterLightbox = document.getElementById("posterLightbox");
+      var posterLightboxClose = document.getElementById("posterLightboxClose");
 
       function setActiveNav(id) {
         navLinks.forEach(function (link) {
@@ -1329,6 +1449,44 @@
         var clickedOutsideNav = !event.target.closest("nav");
         if (clickedOutsideNav) {
           navLinksWrap.classList.remove("open");
+        }
+      });
+
+      function openPosterLightbox() {
+        if (!posterLightbox) return;
+        posterLightbox.classList.add("open");
+        posterLightbox.setAttribute("aria-hidden", "false");
+      }
+
+      function closePosterLightbox() {
+        if (!posterLightbox) return;
+        posterLightbox.classList.remove("open");
+        posterLightbox.setAttribute("aria-hidden", "true");
+      }
+
+      if (posterImage) {
+        posterImage.addEventListener("click", openPosterLightbox);
+      }
+
+      if (posterZoomBtn) {
+        posterZoomBtn.addEventListener("click", openPosterLightbox);
+      }
+
+      if (posterLightboxClose) {
+        posterLightboxClose.addEventListener("click", closePosterLightbox);
+      }
+
+      if (posterLightbox) {
+        posterLightbox.addEventListener("click", function (event) {
+          if (event.target === posterLightbox) {
+            closePosterLightbox();
+          }
+        });
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closePosterLightbox();
         }
       });
 
