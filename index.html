@@ -647,6 +647,194 @@
         color: var(--ink-700);
       }
 
+      .recap-subtitle {
+        margin: 8px 0 14px;
+        font-size: 1.18rem;
+        color: var(--ink-900);
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .recap-subtitle::before {
+        content: "";
+        width: 4px;
+        height: 18px;
+        border-radius: 4px;
+        background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      }
+
+      .recap-subtitle + .video-grid,
+      .recap-subtitle + .photo-block {
+        margin-top: 4px;
+      }
+
+      .video-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin-bottom: 26px;
+      }
+
+      .video-card {
+        background: var(--card);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(255, 255, 255, 0.75);
+        box-shadow: var(--shadow-soft);
+        padding: 14px;
+      }
+
+      .video-frame {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        background: rgba(15, 23, 42, 0.06);
+      }
+
+      .video-frame iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      .video-caption {
+        margin: 12px 4px 2px;
+        font-weight: 700;
+        color: var(--ink-900);
+        font-size: 0.96rem;
+        line-height: 1.35;
+      }
+
+      .video-sub {
+        margin: 2px 4px 4px;
+        font-size: 0.84rem;
+        color: var(--ink-500);
+      }
+
+      .photo-block {
+        background: var(--card);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(255, 255, 255, 0.75);
+        box-shadow: var(--shadow-soft);
+        padding: 18px;
+        margin-bottom: 16px;
+      }
+
+      .photo-block-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 14px;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .photo-block-title {
+        margin: 0;
+        font-size: 1.1rem;
+        color: var(--ink-900);
+      }
+
+      .photo-block-count {
+        font-size: 0.85rem;
+        color: var(--ink-500);
+        font-weight: 600;
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .photo-thumb {
+        display: block;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 10px;
+        cursor: zoom-in;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        background: rgba(15, 23, 42, 0.06);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .photo-thumb:hover {
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 10px 18px rgba(15, 23, 42, 0.18);
+      }
+
+      .photo-more-btn {
+        margin-top: 14px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(15, 118, 110, 0.36);
+        background: rgba(15, 118, 110, 0.08);
+        color: var(--accent-2);
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          background-color 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .photo-more-btn:hover {
+        transform: translateY(-1px);
+        background: rgba(15, 118, 110, 0.14);
+        box-shadow: 0 8px 16px rgba(15, 118, 110, 0.18);
+      }
+
+      .gallery-lightbox-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 0;
+        background: rgba(255, 255, 255, 0.94);
+        color: var(--ink-900);
+        font-size: 1.3rem;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 10px 22px rgba(2, 6, 23, 0.35);
+        z-index: 2;
+      }
+
+      .gallery-lightbox-nav.prev {
+        left: -56px;
+      }
+
+      .gallery-lightbox-nav.next {
+        right: -56px;
+      }
+
+      .gallery-lightbox-counter {
+        position: absolute;
+        bottom: -34px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 4px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.92);
+        color: var(--ink-700);
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+
       .map-container {
         position: relative;
         padding-bottom: 56.25%;
@@ -937,6 +1125,29 @@
         .forum-grid {
           grid-template-columns: 1fr;
         }
+
+        .video-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .photo-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 6px;
+        }
+
+        .gallery-lightbox-nav.prev {
+          left: 4px;
+        }
+
+        .gallery-lightbox-nav.next {
+          right: 4px;
+        }
+      }
+
+      @media (min-width: 769px) and (max-width: 1023px) {
+        .photo-grid {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
       }
 
       @media (min-width: 1024px) {
@@ -985,6 +1196,7 @@
         <a href="#poster">活動海報</a>
         <a href="#speakers">專題演講</a>
         <a href="#panel-discussion">專題座談</a>
+        <a href="#recap">活動回顧</a>
         <a href="#networking">交流活動</a>
         <a href="#agenda">活動議程</a>
         <a href="#location">地點資訊</a>
@@ -1182,6 +1394,102 @@
           <p class="forum-note">
             由三位來自不同領域的產官學代表，解鎖跨域資源，加速 AI 應用實戰落地。
           </p>
+        </div>
+      </section>
+
+      <section id="recap" class="reveal">
+        <h2 class="section-title">活動回顧 (Recap)</h2>
+
+        <h3 class="recap-subtitle">影片回顧</h3>
+        <div class="video-grid reveal">
+          <div class="video-card">
+            <div class="video-frame">
+              <iframe
+                src="https://www.youtube.com/embed/b7CcX4V4xr0"
+                title="Keynote: Long Horizon Prediction - Prof. Katia Sycara"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <p class="video-caption">Keynote: Long Horizon Prediction</p>
+            <p class="video-sub">Prof. Katia Sycara (CMU)</p>
+          </div>
+          <div class="video-card">
+            <div class="video-frame">
+              <iframe
+                src="https://www.youtube.com/embed/b7CcX4V4xr0"
+                title="Keynote: Theory of Mind for Coordination - Prof. Michael Lewis"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <p class="video-caption">Keynote: Theory of Mind for Coordination in Search &amp; Rescue</p>
+            <p class="video-sub">Prof. Michael Lewis (PITT)</p>
+          </div>
+          <div class="video-card">
+            <div class="video-frame">
+              <iframe
+                src="https://www.youtube.com/embed/b7CcX4V4xr0"
+                title="專題座談：解鎖跨域資源，加速 AI 應用實戰落地"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <p class="video-caption">專題座談：解鎖跨域資源</p>
+            <p class="video-sub">加速 AI 應用實戰落地</p>
+          </div>
+        </div>
+
+        <h3 class="recap-subtitle">照片精選</h3>
+        <div
+          class="photo-block reveal"
+          id="morningBlock"
+          data-gallery="morning"
+          data-total="26"
+          data-preview="6"
+        >
+          <div class="photo-block-head">
+            <h4 class="photo-block-title">上午 · 專題演講</h4>
+            <span class="photo-block-count">共 26 張</span>
+          </div>
+          <div class="photo-grid" data-grid="morning">
+            <img class="photo-thumb" src="images/活動照片/上午/morning_01.jpg" alt="活動照片 1" loading="lazy" data-gallery="morning" data-index="0" />
+            <img class="photo-thumb" src="images/活動照片/上午/morning_02.jpg" alt="活動照片 2" loading="lazy" data-gallery="morning" data-index="1" />
+            <img class="photo-thumb" src="images/活動照片/上午/morning_03.jpg" alt="活動照片 3" loading="lazy" data-gallery="morning" data-index="2" />
+            <img class="photo-thumb" src="images/活動照片/上午/morning_04.jpg" alt="活動照片 4" loading="lazy" data-gallery="morning" data-index="3" />
+            <img class="photo-thumb" src="images/活動照片/上午/morning_05.jpg" alt="活動照片 5" loading="lazy" data-gallery="morning" data-index="4" />
+            <img class="photo-thumb" src="images/活動照片/上午/morning_06.jpg" alt="活動照片 6" loading="lazy" data-gallery="morning" data-index="5" />
+          </div>
+          <button class="photo-more-btn" type="button" data-target="morningBlock">
+            <span class="photo-more-label">查看全部 26 張 ↓</span>
+          </button>
+        </div>
+
+        <div
+          class="photo-block reveal"
+          id="afternoonBlock"
+          data-gallery="afternoon"
+          data-total="21"
+          data-preview="6"
+        >
+          <div class="photo-block-head">
+            <h4 class="photo-block-title">下午 · 交流活動</h4>
+            <span class="photo-block-count">共 21 張</span>
+          </div>
+          <div class="photo-grid" data-grid="afternoon">
+            <img class="photo-thumb" src="images/活動照片/下午/afternoon_01.jpg" alt="交流照片 1" loading="lazy" data-gallery="afternoon" data-index="0" />
+            <img class="photo-thumb" src="images/活動照片/下午/afternoon_02.jpg" alt="交流照片 2" loading="lazy" data-gallery="afternoon" data-index="1" />
+            <img class="photo-thumb" src="images/活動照片/下午/afternoon_03.jpg" alt="交流照片 3" loading="lazy" data-gallery="afternoon" data-index="2" />
+            <img class="photo-thumb" src="images/活動照片/下午/afternoon_04.jpg" alt="交流照片 4" loading="lazy" data-gallery="afternoon" data-index="3" />
+            <img class="photo-thumb" src="images/活動照片/下午/afternoon_05.jpg" alt="交流照片 5" loading="lazy" data-gallery="afternoon" data-index="4" />
+            <img class="photo-thumb" src="images/活動照片/下午/afternoon_06.jpg" alt="交流照片 6" loading="lazy" data-gallery="afternoon" data-index="5" />
+          </div>
+          <button class="photo-more-btn" type="button" data-target="afternoonBlock">
+            <span class="photo-more-label">查看全部 21 張 ↓</span>
+          </button>
         </div>
       </section>
 
@@ -1390,6 +1698,47 @@
       </div>
     </div>
 
+    <div class="poster-lightbox" id="galleryLightbox" aria-hidden="true">
+      <div
+        class="poster-lightbox-content"
+        role="dialog"
+        aria-modal="true"
+        aria-label="活動照片放大預覽"
+      >
+        <button
+          class="poster-lightbox-close"
+          id="galleryLightboxClose"
+          type="button"
+          aria-label="關閉照片放大預覽"
+        >
+          ×
+        </button>
+        <button
+          class="gallery-lightbox-nav prev"
+          id="galleryPrev"
+          type="button"
+          aria-label="上一張"
+        >
+          ‹
+        </button>
+        <button
+          class="gallery-lightbox-nav next"
+          id="galleryNext"
+          type="button"
+          aria-label="下一張"
+        >
+          ›
+        </button>
+        <img
+          class="poster-lightbox-image"
+          id="galleryLightboxImage"
+          src=""
+          alt="活動照片放大圖"
+        />
+        <div class="gallery-lightbox-counter" id="galleryCounter">1 / 1</div>
+      </div>
+    </div>
+
     <button class="to-top" id="toTop" aria-label="回到頁面頂端">↑</button>
 
     <script>
@@ -1510,9 +1859,147 @@
         });
       }
 
+      var galleries = {
+        morning: {
+          folder: "images/活動照片/上午/",
+          prefix: "morning_",
+          total: 26,
+          altPrefix: "活動照片 ",
+        },
+        afternoon: {
+          folder: "images/活動照片/下午/",
+          prefix: "afternoon_",
+          total: 21,
+          altPrefix: "交流照片 ",
+        },
+      };
+
+      function buildPhotoUrl(galleryKey, index) {
+        var g = galleries[galleryKey];
+        var num = String(index + 1).padStart(2, "0");
+        return g.folder + g.prefix + num + ".jpg";
+      }
+
+      document.querySelectorAll(".photo-more-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var targetId = btn.getAttribute("data-target");
+          var block = document.getElementById(targetId);
+          if (!block) return;
+          var grid = block.querySelector(".photo-grid");
+          var galleryKey = block.getAttribute("data-gallery");
+          var total = parseInt(block.getAttribute("data-total"), 10);
+          var preview = parseInt(block.getAttribute("data-preview"), 10);
+          var label = btn.querySelector(".photo-more-label");
+          var expanded = block.classList.contains("is-expanded");
+
+          if (!expanded) {
+            if (grid.children.length < total) {
+              var altPrefix = galleries[galleryKey].altPrefix;
+              for (var i = preview; i < total; i++) {
+                var img = document.createElement("img");
+                img.className = "photo-thumb";
+                img.src = buildPhotoUrl(galleryKey, i);
+                img.alt = altPrefix + (i + 1);
+                img.loading = "lazy";
+                img.setAttribute("data-gallery", galleryKey);
+                img.setAttribute("data-index", String(i));
+                grid.appendChild(img);
+              }
+            }
+            block.classList.add("is-expanded");
+            label.textContent = "收合 ↑";
+          } else {
+            while (grid.children.length > preview) {
+              grid.removeChild(grid.lastChild);
+            }
+            block.classList.remove("is-expanded");
+            label.textContent = "查看全部 " + total + " 張 ↓";
+            block.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+
+      var galleryLightbox = document.getElementById("galleryLightbox");
+      var galleryLightboxClose = document.getElementById("galleryLightboxClose");
+      var galleryLightboxImage = document.getElementById("galleryLightboxImage");
+      var galleryPrev = document.getElementById("galleryPrev");
+      var galleryNext = document.getElementById("galleryNext");
+      var galleryCounter = document.getElementById("galleryCounter");
+      var currentGallery = null;
+      var currentIndex = 0;
+
+      function showGalleryImage() {
+        if (!currentGallery || !galleryLightboxImage) return;
+        var total = galleries[currentGallery].total;
+        galleryLightboxImage.src = buildPhotoUrl(currentGallery, currentIndex);
+        galleryLightboxImage.alt =
+          galleries[currentGallery].altPrefix + (currentIndex + 1);
+        if (galleryCounter) {
+          galleryCounter.textContent = currentIndex + 1 + " / " + total;
+        }
+      }
+
+      function openGalleryLightbox(galleryKey, index) {
+        if (!galleryLightbox || !galleries[galleryKey]) return;
+        currentGallery = galleryKey;
+        currentIndex = index;
+        showGalleryImage();
+        galleryLightbox.classList.add("open");
+        galleryLightbox.setAttribute("aria-hidden", "false");
+      }
+
+      function closeGalleryLightbox() {
+        if (!galleryLightbox) return;
+        galleryLightbox.classList.remove("open");
+        galleryLightbox.setAttribute("aria-hidden", "true");
+        currentGallery = null;
+      }
+
+      function galleryStep(delta) {
+        if (!currentGallery) return;
+        var total = galleries[currentGallery].total;
+        currentIndex = (currentIndex + delta + total) % total;
+        showGalleryImage();
+      }
+
+      document.querySelectorAll(".photo-grid").forEach(function (grid) {
+        grid.addEventListener("click", function (event) {
+          var thumb = event.target.closest(".photo-thumb");
+          if (!thumb) return;
+          var gallery = thumb.getAttribute("data-gallery");
+          var index = parseInt(thumb.getAttribute("data-index"), 10);
+          if (gallery && !isNaN(index)) openGalleryLightbox(gallery, index);
+        });
+      });
+
+      if (galleryLightboxClose) {
+        galleryLightboxClose.addEventListener("click", closeGalleryLightbox);
+      }
+      if (galleryPrev) {
+        galleryPrev.addEventListener("click", function () {
+          galleryStep(-1);
+        });
+      }
+      if (galleryNext) {
+        galleryNext.addEventListener("click", function () {
+          galleryStep(1);
+        });
+      }
+      if (galleryLightbox) {
+        galleryLightbox.addEventListener("click", function (event) {
+          if (event.target === galleryLightbox) closeGalleryLightbox();
+        });
+      }
+
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
           closePosterLightbox();
+          closeGalleryLightbox();
+          return;
+        }
+        if (galleryLightbox && galleryLightbox.classList.contains("open")) {
+          if (event.key === "ArrowLeft") galleryStep(-1);
+          else if (event.key === "ArrowRight") galleryStep(1);
         }
       });
 
