@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "PowerShell($morningDir = \"c:\\\\Users\\\\sckwi\\\\Desktop\\\\aicoe-web\\\\images\\\\活動照片\\\\上午\"; $files = Get-ChildItem -Path $morningDir -File | Sort-Object Name; $i = 1; foreach \\($file in $files\\) { $newName = \"morning_{0:D2}.jpg\" -f $i; Rename-Item -LiteralPath $file.FullName -NewName $newName; $i++ }; Get-ChildItem -Path $morningDir -File | Sort-Object Name | Select-Object -ExpandProperty Name)",
-      "PowerShell($afternoonDir = \"c:\\\\Users\\\\sckwi\\\\Desktop\\\\aicoe-web\\\\images\\\\活動照片\\\\下午\"; $files = Get-ChildItem -Path $afternoonDir -File | Sort-Object Name; $i = 1; foreach \\($file in $files\\) { $newName = \"afternoon_{0:D2}.jpg\" -f $i; Rename-Item -LiteralPath $file.FullName -NewName $newName; $i++ }; Get-ChildItem -Path $afternoonDir -File | Sort-Object Name | Select-Object -ExpandProperty Name)",
-      "PowerShell($paths = @\\(\"c:\\\\Users\\\\sckwi\\\\Desktop\\\\aicoe-web\\\\images\\\\活動照片\\\\上午\\\\morning_01.jpg\", \"c:\\\\Users\\\\sckwi\\\\Desktop\\\\aicoe-web\\\\images\\\\活動照片\\\\上午\\\\morning_26.jpg\", \"c:\\\\Users\\\\sckwi\\\\Desktop\\\\aicoe-web\\\\images\\\\活動照片\\\\下午\\\\afternoon_01.jpg\", \"c:\\\\Users\\\\sckwi\\\\Desktop\\\\aicoe-web\\\\images\\\\活動照片\\\\下午\\\\afternoon_21.jpg\"\\); foreach \\($p in $paths\\) { if \\(Test-Path -LiteralPath $p\\) { \"OK  $p\" } else { \"MISSING  $p\" } })"
-    ]
-  }
-}
